@@ -4,7 +4,7 @@ RUN yum install -y golang && yum clean all
 
 ADD . /go/src/github.com/openshift/clam-scanner
 RUN export GOBIN=/bin GOPATH=/go && \
-    go get github.com/golang/glog github.com/spf13/cobra github.com/spf13/pflag && \
+    go get github.com/spf13/cobra github.com/spf13/pflag && \
     cd  /go/src/github.com/openshift/clam-scanner && \
     go install && \
     rm -rf /go && \

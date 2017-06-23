@@ -2,9 +2,9 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
 
-	"github.com/golang/glog"
 	"github.com/openshift/clam-scanner/pkg/clamav"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
@@ -100,7 +100,7 @@ func (o *ClamScanOptions) Run() error {
 
 	out, err := scanner.Scan()
 	if err != nil {
-		glog.Fatalf("Error performing scanning: %v", err)
+		log.Fatalf("Error performing scanning: %v", err)
 	}
 
 	os.Stdout.Write(out)

@@ -11,8 +11,6 @@ import (
 	"strings"
 	"sync"
 	"syscall"
-
-	"github.com/golang/glog"
 )
 
 // ClamdSession is the interface for a Clamav session.
@@ -212,8 +210,6 @@ func (ses *clamdSession) handleResponses(buf []byte) {
 		response := string(buf[:end])
 		buf = buf[end+1:]
 
-		glog.V(6).Infof("Parsed response:\n  %#v\nremaining buffer:\n  %#v\n", response, string(buf))
-
 		ses.handleResponse(response)
 	}
 }
@@ -247,9 +243,6 @@ func (ses *clamdSession) handleResponse(response string) {
 		Errors:   errors,
 	}
 
-	glog.V(6).Infof("Received scan result for request %d out of %d submitted:\n  %#v\n",
-		requestID, ses.numFilesSubmitted, result)
-
 	if !ses.ignoreNegatives || !result.IsNegative() {
 		ses.results.Files = append(ses.results.Files, result)
 	}
@@ -257,7 +250,6 @@ func (ses *clamdSession) handleResponse(response string) {
 
 // parseClamdResponse takes a response that was received from clamd and parses it.
 func parseClamdResponse(response string) (int, string, error) {
-	glog.V(6).Infof("Parsing clamd response: %q\n", response)
 
 	parts := strings.SplitN(response, ": ", 3)
 	if len(parts) < 3 {

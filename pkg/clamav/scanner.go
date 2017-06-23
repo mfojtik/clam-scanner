@@ -2,8 +2,6 @@ package clamav
 
 import (
 	"encoding/json"
-
-	"github.com/golang/glog"
 )
 
 // ClamScanner is the interface for a scanner.
@@ -34,7 +32,6 @@ func NewClamScanner(path, socket string, omitNegatives bool) ClamScanner {
 // Recoverable errors are encoded in the JSON results.  In the case of a
 // non-recoverable error, an error is returned instead.
 func (scanner *clamScanner) Scan() ([]byte, error) {
-	glog.V(2).Infof("Scanning %q...", scanner.path)
 
 	ses, err := NewClamdSession(scanner.socket, scanner.omitNegativeResults)
 	if err != nil {

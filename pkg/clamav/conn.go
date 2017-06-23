@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"net"
 	"time"
-
-	"github.com/golang/glog"
 )
 
 // ClamdConn is the interface for a clamd connection.
@@ -58,7 +56,6 @@ func (conn *clamdConn) Close() error {
 
 // Write sends the specified message to clamd.
 func (conn *clamdConn) Write(msg, oob []byte) error {
-	glog.V(5).Infof("> %q", msg)
 
 	n, oobn, err := conn.socket.WriteMsgUnix(msg, oob, nil)
 	if err != nil {
@@ -83,8 +80,6 @@ func (conn *clamdConn) Read() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	glog.V(5).Infof("< %q", result[:n])
 
 	return result[:n], nil
 }

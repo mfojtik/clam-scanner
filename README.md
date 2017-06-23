@@ -7,7 +7,7 @@ process over a Unix domain socket.
 
 Ensure build dependencies are installed:
 
-    $ go get github.com/golang/glog github.com/spf13/cobra github.com/spf13/pflag
+    $ github.com/spf13/cobra github.com/spf13/pflag
 
 Build clam-scanner using `go install`:
 
@@ -21,6 +21,7 @@ clamd:
 
     $ clam-scanner scan --path=/path/to/scan --socket=/run/clamav/clamd.scan/clamd.sock
     
+
 Use the `--omit-negative-results` flag to omit results for files with negative
 ("OK") results:
 
