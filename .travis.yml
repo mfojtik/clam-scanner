@@ -7,6 +7,10 @@ go:
 
 install:
   - export PATH=$GOPATH/bin:$PATH
+  - go get -u github.com/golang/lint/golint
   - go install
+
+script:
+  - golint -set_exit_status ./...
 
 sudo: false
